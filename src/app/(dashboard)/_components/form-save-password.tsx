@@ -22,9 +22,12 @@ import { Input } from '@/components/ui/input';
 import { PasswordConfig } from '@/lib/password';
 import { passwordSchema, type PasswordSchema } from '@/schema/password.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { SaveIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { CreatePasswordAction } from '../_actions/create-password-action';
 import PasswordOptionsTags from './password-options-tags';
 
 interface Props {
@@ -54,8 +57,20 @@ export function FormSavePassword({ password, passwordConfig }: Props) {
 		}
 	}, [isOpen, password, form, passwordConfig]);
 
+	const { mutate, isPending } = useMutation({
+		mutationFn: CreatePasswordAction,
+		async onSuccess(data) {
+			form.reset();
+			toast.success(`Password: ${data.title} saved successfully! 🎉`);
+			setIsOpen(false);
+		},
+		onError(error) {
+			toast.error(`Error saving password: ${error.message}`);
+		},
+	});
+
 	function onSubmit(values: PasswordSchema) {
-		console.log(values);
+		mutate(values);
 	}
 	return (
 		<Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -148,6 +163,7 @@ export function FormSavePassword({ password, passwordConfig }: Props) {
 						<Button variant="outline">Cancel</Button>
 					</DialogClose>
 					<Button
+						disabled={isPending}
 						type="submit"
 						onClick={form.handleSubmit(onSubmit)}
 						className="bg-blue-600 hover:bg-blue-700 text-white"
