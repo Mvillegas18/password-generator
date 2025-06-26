@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Password Generator App
 
-## Getting Started
+Este proyecto es una aplicación de gestión y generación de contraseñas construida con [Next.js](https://nextjs.org), [Prisma](https://www.prisma.io/) (usando SQLite), [Tailwind CSS](https://tailwindcss.com/), [shadcn/ui](https://ui.shadcn.com/), y [TanStack Query](https://tanstack.com/query/latest).
 
-First, run the development server:
+## Tecnologías utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+-   **Next.js**: Framework de React para aplicaciones web modernas.
+-   **Prisma + SQLite**: ORM para Node.js y base de datos ligera para desarrollo local.
+-   **Tailwind CSS**: Utilidades CSS para un diseño rápido y responsivo.
+-   **shadcn/ui**: Componentes accesibles y personalizables para React.
+-   **TanStack Query**: Manejo eficiente de datos asíncronos y caché en React.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Instalación
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clona el repositorio:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    ```bash
+    git clone https://github.com/tu-usuario/password-generator.git
+    cd password-generator
+    ```
 
-## Learn More
+2. Instala las dependencias:
 
-To learn more about Next.js, take a look at the following resources:
+    ```bash
+    npm install
+    # o
+    yarn install
+    # o
+    pnpm install
+    # o
+    bun install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Configura la base de datos:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    ```bash
+    npx prisma migrate dev --name init
+    ```
 
-## Deploy on Vercel
+4. Inicia el servidor de desarrollo:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    npm run dev
+    # o
+    yarn dev
+    # o
+    pnpm dev
+    # o
+    bun dev
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
+
+Puedes comenzar a editar la página modificando `app/page.tsx`. La página se actualizará automáticamente a medida que edites el archivo.
+
+Este proyecto utiliza [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) para optimizar y cargar automáticamente [Geist](https://vercel.com/font), una nueva familia de fuentes para Vercel.
+
+## Aprender más
+
+Para aprender más sobre Next.js, consulta los siguientes recursos:
+
+-   [Documentación de Next.js](https://nextjs.org/docs) - aprende sobre las características y la API de Next.js.
+-   [Aprender Next.js](https://nextjs.org/learn) - un tutorial interactivo de Next.js.
+
+Puedes consultar [el repositorio de Next.js en GitHub](https://github.com/vercel/next.js) - ¡tus comentarios y contribuciones son bienvenidos!
+
+## Desplegar en Vercel
+
+La forma más sencilla de desplegar tu aplicación Next.js es usar la [Plataforma Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) de los creadores de Next.js.
+
+Consulta nuestra [documentación de despliegue de Next.js](https://nextjs.org/docs/app/building-your-application/deploying) para más detalles.
