@@ -1,0 +1,3 @@
+allowed:
+    - prisma
+    - '@prisma/client'
