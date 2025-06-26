@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { CopyIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { getPasswordsAction } from '../_actions/get-action';
+import PasswordDeleteDialog from './password-delete-password';
 import PasswordOptionsTags from './password-options-tags';
 
 const PasswordList = () => {
@@ -73,7 +74,7 @@ const PasswordList = () => {
 									<CopyIcon className="mr-2 h-4 w-4" />
 									Copiar contraseña
 								</Button>
-								{/* Dialog para eliminar */}
+								<PasswordDeleteDialog id={password.id} />
 							</section>
 						</CardContent>
 					</Card>
