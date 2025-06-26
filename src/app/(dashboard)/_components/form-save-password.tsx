@@ -22,7 +22,7 @@ import { Input } from '@/components/ui/input';
 import { PasswordConfig } from '@/lib/password';
 import { passwordSchema, type PasswordSchema } from '@/schema/password.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { SaveIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -42,7 +42,7 @@ export function FormSavePassword({ password, passwordConfig }: Props) {
 		resolver: zodResolver(passwordSchema),
 		defaultValues: {
 			title: '',
-			password: 'asgfasdg',
+			password: '',
 		},
 	});
 
@@ -57,12 +57,17 @@ export function FormSavePassword({ password, passwordConfig }: Props) {
 		}
 	}, [isOpen, password, form, passwordConfig]);
 
+	const queryClient = useQueryClient();
+
 	const { mutate, isPending } = useMutation({
 		mutationFn: CreatePasswordAction,
 		async onSuccess(data) {
 			form.reset();
 			toast.success(`Password: ${data.title} saved successfully! 🎉`);
 			setIsOpen(false);
+			queryClient.invalidateQueries({
+				queryKey: ['passwords'],
+			});
 		},
 		onError(error) {
 			toast.error(`Error saving password: ${error.message}`);
