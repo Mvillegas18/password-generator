@@ -35,12 +35,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.10.0
- * Query Engine version: aee10d5a411e4360c6d3445ce4810ca65adbf3e8
+ * Prisma Client JS version: 6.10.1
+ * Query Engine version: 9b628578b3b7cae625e8c927178f15a170e74a9c
  */
 Prisma.prismaVersion = {
-  client: "6.10.0",
-  engine: "aee10d5a411e4360c6d3445ce4810ca65adbf3e8"
+  client: "6.10.1",
+  engine: "9b628578b3b7cae625e8c927178f15a170e74a9c"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -87,6 +87,9 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -106,6 +109,11 @@ exports.Prisma.PasswordScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 };
 
 
@@ -141,16 +149,16 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../../prisma",
-  "clientVersion": "6.10.0",
-  "engineVersion": "aee10d5a411e4360c6d3445ce4810ca65adbf3e8",
+  "clientVersion": "6.10.1",
+  "engineVersion": "9b628578b3b7cae625e8c927178f15a170e74a9c",
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "sqlite",
+  "activeProvider": "postgresql",
   "inlineDatasources": {
     "db": {
       "url": {
@@ -159,8 +167,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Password {\n  id                String   @id @default(uuid())\n  title             String\n  encryptedPassword String\n  createdAt         DateTime @default(now())\n  updatedAt         DateTime @updatedAt\n  length            Int      @default(4)\n  hasUppercase      Boolean  @default(false)\n  hasLowercase      Boolean  @default(false)\n  hasNumbers        Boolean  @default(false)\n  hasSymbols        Boolean  @default(false)\n}\n",
-  "inlineSchemaHash": "3e66f7074a366c879239b356477dbc87acff0e8511b12d668d0b74146321dfa2",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel Password {\n  id                String   @id @default(uuid())\n  title             String\n  encryptedPassword String\n  createdAt         DateTime @default(now())\n  updatedAt         DateTime @updatedAt\n  length            Int      @default(4)\n  hasUppercase      Boolean  @default(false)\n  hasLowercase      Boolean  @default(false)\n  hasNumbers        Boolean  @default(false)\n  hasSymbols        Boolean  @default(false)\n}\n",
+  "inlineSchemaHash": "ad3eadd0073b5497adf462365ce5b75042bce563281419603e5ce337c7b54450",
   "copyEngine": true
 }
 
