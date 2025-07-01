@@ -1,11 +1,11 @@
 # Password Generator App
 
-Este proyecto es una aplicación de gestión y generación de contraseñas construida con [Next.js](https://nextjs.org), [Prisma](https://www.prisma.io/) (usando SQLite), [Tailwind CSS](https://tailwindcss.com/), [shadcn/ui](https://ui.shadcn.com/), y [TanStack Query](https://tanstack.com/query/latest).
+Este proyecto es una aplicación de gestión y generación de contraseñas construida con [Next.js](https://nextjs.org), [Prisma](https://www.prisma.io/) (usando PostgreSQL y Supabase), [Tailwind CSS](https://tailwindcss.com/), [shadcn/ui](https://ui.shadcn.com/), y [TanStack Query](https://tanstack.com/query/latest).
 
 ## Tecnologías utilizadas
 
 -   **Next.js**: Framework de React para aplicaciones web modernas.
--   **Prisma + SQLite**: ORM para Node.js y base de datos ligera para desarrollo local.
+-   **Prisma + PostgreSQL + Supabase**: ORM para Node.js y base de datos gestionada en la nube.
 -   **Tailwind CSS**: Utilidades CSS para un diseño rápido y responsivo.
 -   **shadcn/ui**: Componentes accesibles y personalizables para React.
 -   **TanStack Query**: Manejo eficiente de datos asíncronos y caché en React.
@@ -31,13 +31,25 @@ Este proyecto es una aplicación de gestión y generación de contraseñas const
     bun install
     ```
 
-3. Configura la base de datos:
+3. Configura la base de datos en Supabase:
+
+    - Crea un proyecto en [Supabase](https://supabase.com/).
+    - Copia la cadena de conexión de PostgreSQL (DATABASE_URL y DIRECT_URL) y colócala en un archivo `.env` en la raíz del proyecto:
+
+    ```env
+    DATABASE_URL="postgresql://usuario:contraseña@host:puerto/dbname?pgbouncer=true"
+    DIRECT_URL="postgresql://usuario:contraseña@host:puerto/dbname"
+    ```
+
+4. Ejecuta las migraciones para crear las tablas en Supabase:
 
     ```bash
+    npx prisma migrate deploy
+    # o, si es la primera vez:
     npx prisma migrate dev --name init
     ```
 
-4. Inicia el servidor de desarrollo:
+5. Inicia el servidor de desarrollo:
 
     ```bash
     npm run dev
